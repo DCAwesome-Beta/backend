@@ -3,6 +3,7 @@ import { Express, Request, Response } from 'express';
 import express from 'express';
 import { errorHandler } from './middleware';import * as dotenv from 'dotenv';
 import path from 'path';
+import { users } from './routers';
 
 dotenv.config({ path: path.resolve(__dirname, '../env') });
 
@@ -22,6 +23,8 @@ app.use((req, res, next) => {
 app.get('/ping', (_req: Request, res: Response) => {
     res.status(200).send('pong');
 });
+
+app.use('/users', users)
 
 // Error handling
 app.use(errorHandler);

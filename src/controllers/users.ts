@@ -37,4 +37,4 @@ const signupUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-export default { signupUser, loginUser }
+export { signupUser, loginUser }

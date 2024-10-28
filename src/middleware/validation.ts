@@ -11,9 +11,9 @@ export const validate =
         body: req.body,
         query: req.query
       });
-      return next();
+      next();
     } catch (err: unknown) {
-      return res
+      res
         .status(400)
         .json({ type: (err as Error).name, message: (err as Error).message });
     }
