@@ -4,6 +4,7 @@ import express from 'express';
 import { errorHandler } from './middleware';import * as dotenv from 'dotenv';
 import path from 'path';
 import { users } from './routers';
+import wallets from './routers/wallets';
 
 dotenv.config({ path: path.resolve(__dirname, '../env') });
 
@@ -25,6 +26,7 @@ app.get('/ping', (_req: Request, res: Response) => {
 });
 
 app.use('/users', users)
+app.use('/wallets', wallets.walletRouter, wallets.authWalletRouter)
 
 // Error handling
 app.use(errorHandler);

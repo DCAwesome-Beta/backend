@@ -1,6 +1,7 @@
 import mongoose, { Model } from "mongoose"
 import bcrypt from "bcrypt"
 import validator from "validator"
+import { circleDevSdk } from "../services/devControlledWalletSdk";
 
 const Schema = mongoose.Schema
 
@@ -9,6 +10,7 @@ interface IUser {
     _id: string;
     email: string;
     password: string;
+    walletSet: string;
 }
 
 interface UserModel extends Model<IUser> {
@@ -31,6 +33,11 @@ const userSchema = new Schema<IUser, UserModel>({
   password: {
     type: String,
     required: true
+  },
+  walletSet: {
+    type: String,
+    required: true,
+    unique: true
   }
 })
 
@@ -57,7 +64,10 @@ userSchema.statics.signup = async function(email: string, password: string) {
   const salt = await bcrypt.genSalt(10)
   const hash = await bcrypt.hash(password, salt)
 
-  const user = await this.create({ email, password: hash })
+  const response = await circleDevSdk.createWalletSet({
+    name: email
+  })
+  const user = await this.create({ email, password: hash, walletSet: response.data?.walletSet })
 
   return user
 }

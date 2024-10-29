@@ -4,14 +4,15 @@ import {
     signupUser
 } from '../controllers';
 import {
+    loginSchema,
     validate,
+    signupSchema
 } from '../middleware';
-import { signupSchema } from '../middleware/types/schemas';
 
 const users = express.Router();
 
 users.post('/signup', validate(signupSchema), signupUser);
 
-users.post('/login', validate(loginUser), loginUser);
+users.post('/login', validate(loginSchema), loginUser);
 
 export { users };
