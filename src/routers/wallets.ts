@@ -18,4 +18,4 @@ authWalletRouter.post('/', validate(createWalletSchema), createWallet);
 authWalletRouter.post('/set', validate(createWalletSetSchema), createWalletSet)
 walletRouter.put('/balance/:id', validate(walletTokenBalanceSchema), getWalletTokenBalance);
 
-export default { walletRouter, authWalletRouter};
+export { walletRouter, authWalletRouter};
