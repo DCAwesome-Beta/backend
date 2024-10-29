@@ -24,8 +24,8 @@ authWalletRouter.get('/', validate(listWalletsSchema), listWallets);
 walletRouter.get('/:id', validate(getWalletSchema), getWallet);
 authWalletRouter.post('/', validate(createWalletSchema), createWallet);
 authWalletRouter.post('/set', validate(createWalletSetSchema), createWalletSet);
-walletRouter.put(
-  '/balance/:id',
+walletRouter.get(
+  '/:id/balances',
   validate(walletTokenBalanceSchema),
   getWalletTokenBalance
 );

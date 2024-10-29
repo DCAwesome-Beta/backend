@@ -25,7 +25,7 @@ export const listWallets = async (
   next: NextFunction
 ) => {
   try {
-    const user = await Users.findById(req.headers.token);
+    const user = await Users.findById(req.headers.user);
     if (!user) {
       res.status(401).json({ error: 'Request is not authorized' });
       return;
@@ -77,7 +77,7 @@ export const createWallet = async (
   next: NextFunction
 ) => {
   try {
-    const user = await Users.findById(req.headers.token);
+    const user = await Users.findById(req.headers.user);
     if (!user) {
       res.status(401).json({ error: 'Request is not authorized' });
       return;

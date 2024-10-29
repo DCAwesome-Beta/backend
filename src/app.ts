@@ -8,6 +8,7 @@ import {
   authTransRouter,
   authWalletRouter,
   faucet,
+  tokens,
   transactions,
   users,
   walletRouter
@@ -36,6 +37,7 @@ app.use('/', users);
 app.use('/wallets', walletRouter, authWalletRouter);
 app.use('/faucet', faucet);
 app.use('/transactions', transactions, authTransRouter);
+app.use('/tokens', tokens);
 
 // Error handling
 app.use(errorHandler);

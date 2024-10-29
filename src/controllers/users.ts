@@ -23,14 +23,14 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
 
 // signup a user
 const signupUser = async (req: Request, res: Response, next: NextFunction) => {
-  const { userName, email, password } = req.body;
+  const { email, password } = req.body;
   try {
     const user = await User.signup(email, password);
 
     // create a token
     const token = createToken(user._id);
 
-    res.status(200).json({ userName, email, token });
+    res.status(200).json({ email, token });
   } catch (error: any) {
     res.status(400).json({ error: error.message });
     next(error);

@@ -84,7 +84,6 @@ export const createWalletSchema = yup.object({
   body: yup
     .object({
       blockchain: yup.string().required(),
-      walletSetId: yup.string().required()
     })
     .noUnknown(true)
     .strict()
@@ -128,7 +127,7 @@ export const transferTokensSchema = yup.object({
   body: yup
     .object({
       idempotencyKey: yup.string().optional(),
-      amounts: yup.array().of(yup.string().required()).optional(),
+      amount: yup.string().required(),
       destinationAddress: yup.string().required(),
       feeLevel: yup.string().optional(),
       gasLimit: yup.string().optional(),
@@ -178,6 +177,16 @@ export const estimateTransferTokensSchema = yup.object({
       sourceAddress: yup.string().optional(),
       tokenId: yup.string().required(),
       walletId: yup.string().optional()
+    })
+    .noUnknown(true)
+    .strict()
+});
+
+// Tokens
+export const getTokenDetailsSchema = yup.object({
+  params: yup
+    .object({
+      id: yup.string().required()
     })
     .noUnknown(true)
     .strict()

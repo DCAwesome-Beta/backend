@@ -15,21 +15,15 @@ export const authMiddleware = (
 
   const bearer = bearerHeader.split(' ');
   const bearerToken = bearer[1];
-
   try {
-    const { _id, payload } = jwt.verify(
+    const { _id } = jwt.verify(
       bearerToken,
       process.env.SECRET || ''
-    ) as { _id: string; payload: JwtPayload };
-    if (payload.exp && Date.now() > payload.exp * 1000) {
-      res.sendStatus(403);
-      return;
-    }
+    ) as { _id: string };
 
-    req.headers.token = _id;
+    req.headers.user = _id;
     next();
   } catch (error) {
-    console.log(error);
     res.status(401).json({ error: 'Request is not authorized' });
   }
 };

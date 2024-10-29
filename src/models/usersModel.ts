@@ -57,6 +57,13 @@ userSchema.statics.signup = async function (email: string, password: string) {
       idempotencyKey: randomUUID(),
       name: email
     });
+    await circleDevSdk.createWallets({
+      idempotencyKey: randomUUID(),
+      walletSetId: response.data?.walletSet.id!,
+      count: 1,
+      blockchains: ["ETH-SEPOLIA"],
+      accountType: "SCA"
+    })
     const user = await this.create({
       email,
       password: hash,

@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { getFeeConfiguration } from '../shared/utils';
 import { circleDevSdk } from '../services/devControlledWalletSdk';
+import { randomUUID } from 'crypto';
 
 export const listTransactions = async (
   req: Request,
@@ -30,9 +31,9 @@ export const createTransaction = async (
 
     const response = await circleDevSdk.createTransaction({
       fee: feeConfig,
-      idempotencyKey: req.body.idempotencyKey,
-      refId: req.body.refId,
-      amount: req.body.amount,
+      idempotencyKey: randomUUID(),
+      refId: randomUUID(),
+      amount: [req.body.amount],
       destinationAddress: req.body.destinationAddress,
       nftTokenIds: req.body.nftTokenIds,
       tokenId: req.body.tokenId,
@@ -82,7 +83,7 @@ export const estimateTransferFee = async (
 ) => {
   try {
     const response = await circleDevSdk.estimateTransferFee({
-      userToken: req.headers['token'],
+      userToken: req.headers['user'],
       ...req.body
     });
     res.status(200).send(response.data);
