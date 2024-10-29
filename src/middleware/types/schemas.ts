@@ -101,3 +101,85 @@ export const postFaucetDripSchema = yup.object({
       .strict()
   });
   
+// Transactions
+export const listTransactionsSchema = yup.object({
+    query: yup
+      .object({
+        blockchain: yup.string().optional(),
+        custodyType: yup.string().optional(),
+        destinationAddress: yup.string().optional(),
+        includeAll: yup.boolean().optional(),
+        operation: yup.string().optional(),
+        state: yup.string().optional(),
+        txHash: yup.string().optional(),
+        txType: yup.string().optional(),
+        walletIds: yup.array().of(yup.string().required()).optional(),
+        from: yup.date().optional(),
+        to: yup.date().optional(),
+        pageBefore: yup.string().optional(),
+        pageAfter: yup.string().optional(),
+        pageSize: yup.number().optional()
+      })
+      .noUnknown(true)
+      .strict()
+  });
+  
+  export const transferTokensSchema = yup.object({
+    body: yup
+      .object({
+        idempotencyKey: yup.string().optional(),
+        amounts: yup.array().of(yup.string().required()).optional(),
+        destinationAddress: yup.string().required(),
+        feeLevel: yup.string().optional(),
+        gasLimit: yup.string().optional(),
+        gasPrice: yup.string().optional(),
+        maxFee: yup.string().optional(),
+        priorityFee: yup.string().optional(),
+        nftTokenIds: yup.array().of(yup.string().required()).optional(),
+        refId: yup.string().optional(),
+        tokenId: yup.string().required(),
+        walletId: yup.string().required()
+      })
+      .noUnknown(true)
+      .strict()
+  });
+  
+  export const validateAddressSchema = yup.object({
+    body: yup
+      .object({
+        address: yup.string().required(),
+        blockchain: yup.string().required()
+      })
+      .noUnknown(true)
+      .strict()
+  });
+  
+  export const getTransactionSchema = yup.object({
+    params: yup
+      .object({
+        id: yup.string().required()
+      })
+      .noUnknown(true)
+      .strict(),
+    query: yup
+      .object({
+        txType: yup.string().optional()
+      })
+      .noUnknown(true)
+      .strict()
+  });
+  
+  export const estimateTransferTokensSchema = yup.object({
+    body: yup
+      .object({
+        amount: yup.array().of(yup.string().required()).required(),
+        destinationAddress: yup.string().required(),
+        nftTokenIds: yup.array().of(yup.string().required()).optional(),
+        sourceAddress: yup.string().optional(),
+        tokenId: yup.string().required(),
+        walletId: yup.string().optional()
+      })
+      .noUnknown(true)
+      .strict()
+  });
+  
