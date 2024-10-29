@@ -1,4 +1,4 @@
-import { FeeLevel } from "@circle-fin/developer-controlled-wallets";
+import { FeeLevel } from '@circle-fin/developer-controlled-wallets';
 
 export type FeeConfiguration =
   | {

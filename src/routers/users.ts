@@ -1,13 +1,6 @@
 import express from 'express';
-import {
-    loginUser,
-    signupUser
-} from '../controllers';
-import {
-    loginSchema,
-    validate,
-    signupSchema
-} from '../middleware';
+import { loginUser, signupUser } from '../controllers';
+import { loginSchema, validate, signupSchema } from '../middleware';
 
 const users = express.Router();
 
