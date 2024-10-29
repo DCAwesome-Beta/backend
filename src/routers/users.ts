@@ -6,6 +6,6 @@ const users = express.Router();
 
 users.post('/signup', validate(signupSchema), signupUser);
 
-users.post('/login', validate(loginSchema), loginUser);
+users.post('/signin', validate(loginSchema), loginUser);
 
 export { users };

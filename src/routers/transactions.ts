@@ -26,7 +26,6 @@ authTransRouter.use(authMiddleware);
  * Returns transactions.
  *
  * Params:
- *  userId: string             - filter by external user ID filters.
  *  blockchain: string         - filter by blockchain.
  *  custodyType: string        - filter by the custody type.
  *  destinationAddress: string - filter by the destination address.

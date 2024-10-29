@@ -13,7 +13,7 @@ import {
   walletRouter
 } from './routers';
 
-dotenv.config({ path: path.resolve(__dirname, '../env') });
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 export const app: Express = express();
 
@@ -32,7 +32,7 @@ app.get('/ping', (_req: Request, res: Response) => {
   res.status(200).send('pong');
 });
 
-app.use('/users', users);
+app.use('/', users);
 app.use('/wallets', walletRouter, authWalletRouter);
 app.use('/faucet', faucet);
 app.use('/transactions', transactions, authTransRouter);
