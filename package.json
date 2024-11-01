@@ -16,7 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@circle-fin/developer-controlled-wallets": "^4.7.0",
+    "@circle-fin/developer-controlled-wallets": "^5.0.1",
     "@types/bcrypt": "^5.0.2",
     "@types/validator": "^13.12.2",
     "bcrypt": "^5.1.1",
