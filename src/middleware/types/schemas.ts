@@ -143,6 +143,36 @@ export const transferTokensSchema = yup.object({
     .strict()
 });
 
+export const contractExecutionTransactionSchema = yup.object({
+  body: yup
+    .object({
+      amount: yup.string().required(),
+      contractAddress: yup.string().required(),
+      feeLevel: yup.string().optional(),
+      gasLimit: yup.string().optional(),
+      gasPrice: yup.string().optional(),
+      maxFee: yup.string().optional(),
+      priorityFee: yup.string().optional(),
+      walletId: yup.string().required(),
+      abiFunctionSignature: yup.string().required(),
+      abiParameters: yup.array().of(yup.mixed().required()).optional()
+    })
+    .noUnknown(true)
+    .strict()
+});
+
+export const estimateContractExecutionTransactionSchema = yup.object({
+  body: yup
+    .object({
+      contractAddress: yup.string().required(),
+      abiFunctionSignature: yup.string().required(),
+      abiParameters: yup.array().of(yup.mixed().required()).optional(),
+      walletId: yup.string().required()
+    })
+    .noUnknown(true)
+    .strict()
+});
+
 export const validateAddressSchema = yup.object({
   body: yup
     .object({

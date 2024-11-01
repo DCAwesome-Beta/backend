@@ -1,6 +1,8 @@
 import express from 'express';
 import {
   authMiddleware,
+  contractExecutionTransactionSchema,
+  estimateContractExecutionTransactionSchema,
   estimateTransferTokensSchema,
   getTransactionSchema,
   listTransactionsSchema,
@@ -9,7 +11,9 @@ import {
   validateAddressSchema
 } from '../middleware';
 import {
+  createContractExecutionTransaction,
   createTransaction,
+  estimateContractExecutionFees,
   estimateTransferFee,
   getTransaction,
   listTransactions,
@@ -144,6 +148,19 @@ authTransRouter.post(
   validate(estimateTransferTokensSchema),
   estimateTransferFee
 );
+
+
+authTransRouter.post(
+  '/contract',
+  validate(contractExecutionTransactionSchema),
+  createContractExecutionTransaction
+)
+
+authTransRouter.post(
+  '/contract/estimateFee',
+  validate(estimateContractExecutionTransactionSchema),
+  estimateContractExecutionFees
+)
 
 /*
  * POST - /transactions/validateAddress

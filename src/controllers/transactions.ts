@@ -45,6 +45,53 @@ export const createTransaction = async (
   }
 };
 
+export const createContractExecutionTransaction = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const feeConfig = getFeeConfiguration(req);
+    if (!feeConfig) {
+      throw new Error('Invalid fee configuration');
+    }
+
+    const response = await circleDevSdk.createContractExecutionTransaction({
+      fee: feeConfig,
+      idempotencyKey: randomUUID(),
+      refId: randomUUID(),
+      contractAddress: req.body.contractAddress,
+      abiFunctionSignature: req.body.abiFunctionSignature,
+      walletId: req.body.walletId,
+      amount: req.body.amount,
+      abiParameters: req.body.abiParameters,
+    });
+    res.status(200).send(response.data);
+  } catch (error: unknown) {
+    next(error);
+  }
+};
+
+export const estimateContractExecutionFees = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const response = await circleDevSdk.estimateContractExecutionFee({
+      contractAddress: req.body.contractAddress,
+      abiFunctionSignature: req.body.abiFunctionSignature,
+      source: {
+        walletId: req.body.walletId
+      },
+      abiParameters: req.body.abiParameters,
+    });
+    res.status(200).send(response.data);
+  } catch (error: unknown) {
+    next(error);
+  }
+}
+
 export const getTransaction = async (
   req: Request,
   res: Response,
