@@ -15,6 +15,7 @@ export const getWalletTokenBalance = async (
     });
     res.status(200).send(response.data);
   } catch (error: unknown) {
+    console.log(error)
     next(error);
   }
 };
@@ -84,13 +85,12 @@ export const createWallet = async (
     }
     const response = await circleDevSdk.createWallets({
       blockchains: [req.body.blockchain],
-      accountType: req.body.blockchain === 'SOL-DEVNET' || req.body.blockchain === 'AVAX-FUJI' || req.body.blockchain === 'NEAR-TESTNET' ? 'EOA' : 'SCA',
+      accountType: req.body.blockchain === 'SOL-DEVNET' || req.body.blockchain === 'AVAX-FUJI' ? 'EOA' : 'SCA',
       walletSetId: user?.walletSet,
       count: 1
     });
     res.status(200).send(response.data);
   } catch (error: unknown) {
-    console.log(error)
     next(error);
   }
 };
