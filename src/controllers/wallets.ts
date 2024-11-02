@@ -15,7 +15,6 @@ export const getWalletTokenBalance = async (
     });
     res.status(200).send(response.data);
   } catch (error: unknown) {
-    console.log(error)
     next(error);
   }
 };

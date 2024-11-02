@@ -146,7 +146,7 @@ export const transferTokensSchema = yup.object({
 export const contractExecutionTransactionSchema = yup.object({
   body: yup
     .object({
-      amount: yup.string().required(),
+      amount: yup.string().optional(),
       contractAddress: yup.string().required(),
       feeLevel: yup.string().optional(),
       gasLimit: yup.string().optional(),
