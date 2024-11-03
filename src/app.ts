@@ -7,6 +7,7 @@ import path from 'path';
 import {
   authTransRouter,
   authWalletRouter,
+  authUsers,
   faucet,
   tokens,
   transactions,
@@ -33,7 +34,7 @@ app.get('/ping', (_req: Request, res: Response) => {
   res.status(200).send('pong');
 });
 
-app.use('/', users);
+app.use('/', users, authUsers);
 app.use('/wallets', walletRouter, authWalletRouter);
 app.use('/faucet', faucet);
 app.use('/transactions', transactions, authTransRouter);

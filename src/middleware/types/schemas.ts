@@ -21,6 +21,27 @@ export const loginSchema = yup.object({
     .strict()
 });
 
+export const setDCAinSchema = yup.object({
+  body: yup
+    .object({
+      inTokens: yup.array().of(yup.string().required()).required(),
+      inMaxTokenCap: yup.array().of(yup.number().required()).required(),
+      triggerToken: yup.string().required()
+    })
+    .noUnknown(true)
+    .strict()
+});
+
+export const setDCAoutSchema = yup.object({
+  body: yup
+    .object({
+      outToken: yup.string().required(),
+      outChain: yup.string().required()
+    })
+    .noUnknown(true)
+    .strict()
+});
+
 // Wallet
 export const walletTokenBalanceSchema = yup.object({
   params: yup
